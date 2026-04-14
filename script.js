@@ -1,6 +1,6 @@
 // array di salvataggio dei contatti
 
-const savings = [];
+let savings = [];
 
 const saveUser = () => {
   const name = document.getElementById("newName").value;
@@ -18,13 +18,14 @@ const saveUser = () => {
 const deleteUser = () => {
   const name = document.getElementById("newName").value;
   const getBack = localStorage.getItem("saved");
-  const terminator = JSON.parse(getBack);
-  console.log("searching ", name, "in", terminator);
-  if (terminator.includes(name)) {
-    const index = terminator.indexOf(name);
-    terminator.pop(index);
-    console.log(name, " has been deleted. the array is now: ", terminator);
+  const salvati = JSON.parse(getBack);
+  console.log("searching ", name, "in", salvati);
+  if (salvati.includes(name)) {
+    const index = salvati.indexOf(name);
+    salvati.pop(index);
+    console.log(name, " has been deleted. the array is now: ", salvati);
     alert(`${name} è stato rimosso dai contatti`);
+    savings = salvati;
     localStorage.setItem("saved", JSON.stringify(savings));
     Contatti("del");
   }
@@ -35,7 +36,7 @@ const Contatti = (x) => {
   const salvati = JSON.parse(getBack);
   const row = document.getElementById("row");
   row.innerHTML = "";
-  if (salvati && x === "add") {
+  if (salvati) {
     salvati.forEach((element) => {
       const card = document.createElement("div");
       card.innerHTML += `<img src="./Sample_User_Icon.png" class="card-img-start" alt="foto del contatto">
