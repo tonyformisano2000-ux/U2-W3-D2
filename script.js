@@ -49,3 +49,12 @@ const Contatti = (x) => {
   }
 };
 Contatti();
+
+let x = 0;
+const counterSection = document.getElementsByClassName("counterSection")[0];
+let counter = document.createElement("h5");
+setInterval(() => {
+  counter.innerText = x;
+  counterSection.appendChild(counter);
+  x += 1;
+}, 1000);
